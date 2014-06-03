@@ -68,7 +68,6 @@ public class JDCConnectionDriver implements Driver {
         return false;
     }
 
-    @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
