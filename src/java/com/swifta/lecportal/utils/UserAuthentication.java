@@ -45,7 +45,7 @@ public class UserAuthentication {
     }
     
     public String getFilePath() {
-        logger.info("Getting properties file path ... ");
+        logger.info("Getting properties file path ... "+System.getProperty("os.name"));
         String fileName = "";
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             fileName = "C:\\PropertyFiles\\afrinnovadatabase.properties";
@@ -55,6 +55,8 @@ public class UserAuthentication {
         }
         if (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0) {
             fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
+        }if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+            fileName = "/User/user/NetBeansProjects/MTNLECPortal/PropertyFiles/afrinnovadatabase.properties";
         }
         if (fileName.length() <= 0) {
             fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
