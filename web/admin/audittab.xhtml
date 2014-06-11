@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core"  
+      ><h:form><h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto">
+            <h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto"> <h:outputLabel value="From:"/>
+                <p:calendar value="#{schoolBean.firstDate}" id="fromDate" pattern="yyyy-MM-dd" /> 
+            </h:panelGrid><h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto">
+                <h:outputLabel value="To:"/>
+                <p:calendar value="#{schoolBean.secondDate}" id="toDate" pattern="yyyy-MM-dd"/> 
+            </h:panelGrid>
+        </h:panelGrid>
+        <br/>
+        <h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto">
+            <p:fieldset legend="Group" styleClass="fifteens bolds centers">
+                <p:selectManyCheckbox value="#{schoolBean.selectedActionTypes}">  
+                    <f:selectItem itemLabel="School Admin" itemValue="SchoolAdmin" />  
+                    <f:selectItem itemLabel="Admin" itemValue="Admin" />  
+                </p:selectManyCheckbox> </p:fieldset>
+            <p:fieldset legend="Actions" styleClass="fifteens bolds centers evenspacing"> 
+                <p:selectManyCheckbox  value="#{schoolBean.selectedActionsPerformed}">  
+                    <f:selectItem itemLabel="Create" itemValue="Create" />  
+                    <f:selectItem itemLabel="Update" itemValue="Update" />  
+                    <f:selectItem itemLabel="Delete" itemValue="Delete" />    
+                </p:selectManyCheckbox> 
+            </p:fieldset>
+            <br/>
+            <br/>
+            <div style="text-align: right;padding: 5px;" class="elevens">
+                <h:form>
+                    <p:commandButton value="Search" styleClass="elevens bolds" action="#{schoolBean.retrieveAuditTrail()}" ajax="false"/>
+                </h:form>
+            </div>
+
+        </h:panelGrid>
+        <h:panelGrid columns="2" styleClass="elevens bolds">  
+            <p:panel header="Export All Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" />  
+                </h:commandLink>  
+            </p:panel>  
+
+            <p:panel header="Export Page Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="audittrails" fileName="#{schoolBean.transactionHistoryFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+            </p:panel>  
+        </h:panelGrid> 
+        <br/>
+        <p:dataTable paginator="true" rows="20" rowsPerPageTemplate="5,10,15,50,100" styleClass="elevens datatables" value="#{schoolBean.auditTrails}" var="auditTrail" id="audittrails">
+            <f:facet name="header">Audit Trail</f:facet>
+            <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Originator Name" />  
+                </f:facet>  
+                <h:outputText value="#{auditTrail.originatorName}" />  
+            </p:column> <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Action Performed" />  
+                </f:facet>  
+                <h:outputText value="#{auditTrail.actionPerformed}" />  
+            </p:column> <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Description" />  
+                </f:facet>  
+                <h:outputText value="#{auditTrail.description}}" />  
+            </p:column> <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Originating IP Address" />  
+                </f:facet>  
+                <h:outputText value="#{auditTrail.originatorIpAddress}" />  
+            </p:column> <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Date" />  
+                </f:facet>  
+                <h:outputText value="#{auditTrail.dateCreated}" />  
+            </p:column>           
+        </p:dataTable>                    
+    </h:form></html>

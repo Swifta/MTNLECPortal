@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core"  
+      ><p:dialog header="Add New Portal Admin" widgetVar="portalAdmin" styleClass="elevens bolds" width="450" resizable="false" modal="true">
+        <h:form>
+            <h:panelGrid styleClass="elevens" columns="2" style="width : 90%;margin: 0 auto">
+
+                <h:outputLabel value="Admin Username : "/>
+                <h:inputText value="#{schoolBean.portalAdmin.username}" styleClass="elevens padded" size="35" required="true" requiredMessage="Administrator Name required" validatorMessage="Validation Error: Ensure the portal admin's name doesn't contain special characters, space and is between 4 to 50-character lenght">
+                    <f:validateRegex pattern="^[^-!@~#$%/\\|][\w\s]{3,50}$" />
+                </h:inputText>
+                <h:outputLabel value="Password : "/>
+                <h:inputText value="#{schoolBean.portalAdmin.password}" styleClass="elevens padded" size="35" required="true" requiredMessage="Admin password required" validatorMessage="Validation Error: Ensure the portal administrator's password doesn't contain special characters, space and is between 6 to 20-character lenght">
+                    <f:validateRegex pattern="^[^-!@~#$%/\\|][\w\s]{5,20}" />
+                </h:inputText>
+                <h:outputLabel value="Pick a role"/>
+                <h:selectOneMenu styleClass="elevens padded" value="#{schoolBean.portalAdmin.roleId}">
+                    <f:selectItems value="#{portalAdminBean.adminRoles}" var="adminRole" itemLabel="#{adminRole.name}" itemValue="#{adminRole.id}"/> 
+                </h:selectOneMenu>
+                <h:outputLabel value=""/>
+                <h:commandButton   value="Create Portal Admin" styleClass="buttons elevens whites bolds padded" style="color : #fff;" action="#{schoolBean.createPortalAdmin()}"/> 
+            </h:panelGrid>                    
+        </h:form>
+    </p:dialog>
+    <div style="text-align: right;padding: 5px;" class="elevens">
+        <h:form>
+            <p:commandButton value="Add Portal Admin" styleClass="elevens bolds" onclick="portalAdmin.show();" style="display:#{portalAdminBean.editable}"/>
+            <p:spacer width="20"/>
+        </h:form>
+    </div>
+    <br />
+    <h:form><h:panelGrid styleClass="elevens bolds" columns="7" style="width : 90%;margin: 0 auto">
+            <h:outputLabel value=""/>
+            <h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto"> 
+                <h:outputLabel value="Enter the username of the admin as a search parameter"/>
+                <h:inputText value="#{portalAdminBean.searchParameter}" styleClass="elevens padded" size="35" validatorMessage="Validation Error: Ensure the search parameter doesn't contain special characters and space.">
+                    <f:validateRegex pattern="^[^-!@~#$%/\\|][\w\s]{0,34}$" />
+                </h:inputText>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <div style="text-align: center;padding: 5px;" class="elevens">
+
+            <p:commandButton value="Search" actionListener="#{portalAdminBean.searchPortalAdmin()}" styleClass="elevens bolds" ajax="false"/>
+
+        </div>
+        <h:panelGrid columns="2" styleClass="elevens bolds">  
+            <p:panel header="Export All Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="adminList" fileName="#{schoolBean.adminListFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="adminList" fileName="#{schoolBean.adminListFileName}"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="adminList" fileName="#{schoolBean.adminListFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="adminList" fileName="#{schoolBean.adminListFileName}" />  
+                </h:commandLink>  
+            </p:panel>  
+
+            <p:panel header="Export Page Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="adminList" fileName="#{schoolBean.adminListFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="adminList" fileName="#{schoolBean.adminListFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="adminList" fileName="#{schoolBean.adminListFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="adminList" fileName="#{schoolBean.adminListFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+            </p:panel>  
+        </h:panelGrid> <p:dataTable paginator="true" rows="20" id="adminList"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                    rowsPerPageTemplate="5,10,15" styleClass="elevens datatables" value="#{portalAdminBean.portalAdmins}" var="portalAdmins" >
+            <f:facet name="header">List of Portal Admins</f:facet>
+            <p:column headerText="Admin Username" sortBy="#{portalAdmins.username}">
+                <h:outputLabel value="#{portalAdmins.username}"/>
+            </p:column><p:column headerText="Admin Role" sortBy="#{portalAdmins.roleName}">
+                <h:outputLabel value="#{portalAdmins.roleName}"/>
+            </p:column>
+            <p:column>  
+                <h:panelGrid styleClass="elevens companyHeaderGrid" columns="5">
+                    <p:commandLink action="#{schoolBean.retrievePortalAdmin(portalAdmins.id)}" style="display:#{portalAdminBean.editable}"> 
+                        <h:graphicImage  value="images/edit.png" /> </p:commandLink> 
+                    <h:outputLabel value="|" style="width:100%" />
+                    <p:commandLink action="#{schoolBean.deletePortalAdmin(portalAdmins.id)}" update="adminList" ajax="true" style="display:#{portalAdminBean.editable}"> 
+                        <h:graphicImage  value="images/delete.png" />
+                    </p:commandLink>
+                </h:panelGrid>
+            </p:column>                   
+        </p:dataTable></h:form></html>

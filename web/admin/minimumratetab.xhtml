@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core"  
+      ><p:dialog header="Add New Minimum Rate" widgetVar="minimumrate" styleClass="elevens bolds" width="450" resizable="false" modal="true">
+        <h:form>
+            <h:panelGrid styleClass="elevens" columns="2" style="width : 90%;margin: 0 auto">
+
+                <h:inputText value="#{schoolBean.minimumRate.amount}" styleClass="elevens padded" size="35" required="true" requiredMessage="Exchange rate required" validatorMessage="Validation Error: Ensure the exchange rate contains just valid numbers.">
+                    LSD   <f:validateRegex pattern="^\d+(\.\d+)?$" />
+                </h:inputText>
+                <h:commandButton   value="Create Minimum Rate" styleClass="buttons elevens whites bolds padded" style="color : #fff;" action="#{schoolBean.createMinimumRate()}"/> 
+            </h:panelGrid>                    
+        </h:form>
+    </p:dialog>
+    <div style="text-align: right;padding: 5px;" class="elevens">
+        <h:form>
+            <p:commandButton value="Add Minimum Rate" styleClass="elevens bolds" onclick="minimumrate.show();" style="display:#{portalAdminBean.editable}"/>
+            <p:spacer width="20"/>
+        </h:form>
+    </div>
+    <br />
+    <h:form>
+        <h:panelGrid styleClass="elevens bolds" columns="7" style="width : 90%;margin: 0 auto">
+            <h:outputLabel value=""/>
+            <h:panelGrid styleClass="elevens bolds" columns="2" style="width : 90%;margin: 0 auto"> 
+                <h:outputLabel value="Enter the date the minimum rate was created"/>
+                <p:calendar value="#{schoolBean.minimumRateDate}" id="minimumRateDate" pattern="yyyy-MM-dd" /> 
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <div style="text-align: center;padding: 5px;" class="elevens">
+
+            <p:commandButton value="Search" actionListener="#{schoolBean.searchMinimumRates()}" styleClass="elevens bolds" ajax="false"/>
+
+        </div>
+        <h:panelGrid columns="2" styleClass="elevens bolds">  
+            <p:panel header="Export All Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="schools" fileName="#{schoolBean.minimumRatesFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="schools" fileName="#{schoolBean.minimumRatesFileName}"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="schools" fileName="#{schoolBean.minimumRatesFileName}" />  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="schools" fileName="#{schoolBean.minimumRatesFileName}" />  
+                </h:commandLink>  
+            </p:panel>  
+
+            <p:panel header="Export Page Data">  
+                <h:commandLink>  
+                    <p:graphicImage value="/images/excel.png" />  
+                    <p:dataExporter type="xls" target="schools" fileName="#{schoolBean.minimumRatesFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/pdf.png" />  
+                    <p:dataExporter type="pdf" target="schools" fileName="#{schoolBean.minimumRatesFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/csv.png" />  
+                    <p:dataExporter type="csv" target="schools" fileName="#{schoolBean.minimumRatesFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+
+                <h:commandLink>  
+                    <p:graphicImage value="/images/xml.png" />  
+                    <p:dataExporter type="xml" target="schools" fileName="#{schoolBean.minimumRatesFileName}" pageOnly="true"/>  
+                </h:commandLink>  
+            </p:panel>  
+        </h:panelGrid><p:dataTable paginator="true" rows="20"  
+                                   paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                   rowsPerPageTemplate="5,10,15" styleClass="elevens datatables" value="#{schoolBean.allMinimumRates}" var="allMinimumRates" id="exchangetable">
+            <f:facet name="header">List of Minimum Rates</f:facet>
+            <p:column headerText=" Minimum rate in LSD" sortBy="#{allMinimumRates.amount}">
+                <h:outputLabel value="#{allMinimumRates.amount}"/>
+            </p:column><p:column headerText=" Date of Minimum Rate " sortBy="#{allMinimumRates.datecreated}">
+                <h:outputLabel value="#{allMinimumRates.datecreated}"/>
+            </p:column>
+            <p:column>  
+                <p:commandLink action="#{schoolBean.retrieveSchool(schools.id)}" style="display:#{portalAdminBean.editable};">
+                    <h:graphicImage  value="images/edit.png" /></p:commandLink>  
+            </p:column>                   
+        </p:dataTable></h:form></html>

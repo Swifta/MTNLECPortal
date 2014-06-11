@@ -975,29 +975,22 @@ public class SchoolBean {
         logger.info("validation failed....");
     }
 
+    
     public void onTabChange(TabChangeEvent event) {
-        logger.info("tab id = " + event.getTab().getId());
+        logger.info("tab id = " + event.getTab().getId() +" and index of ::::"+this.activeIndex);
         String tabId = event.getTab().getId();
-        if (tabId.equalsIgnoreCase("stdreg")) {
-            this.activeIndex = 0;
-        } else if (tabId.equalsIgnoreCase("regstd")) {
-            this.activeIndex = 1;
-        } else if (tabId.equalsIgnoreCase("tranxhist")) {
-            this.activeIndex = 2;
-        } else if (tabId.equalsIgnoreCase("manageschool")) {
+        if(tabId.equalsIgnoreCase("exchangerate")) {
             this.activeIndex = 0;
         } else if (tabId.equalsIgnoreCase("manageminrate")) {
             this.activeIndex = 1;
         }else if (tabId.equalsIgnoreCase("manageportaladmin")) {
             this.activeIndex = 2;
-        } else if (tabId.equalsIgnoreCase("manageadmin")) {
+        }  else if (tabId.equalsIgnoreCase("transhist")) {
             this.activeIndex = 3;
-        } else if (tabId.equalsIgnoreCase("transhist")) {
-            this.activeIndex = 4;
         } else if (tabId.equalsIgnoreCase("audittrail")) {
+            this.activeIndex = 4;
+        }else if (tabId.equalsIgnoreCase("tokenmanagement")) {
             this.activeIndex = 5;
-        }else if (tabId.equalsIgnoreCase("manageminrates")) {
-            this.activeIndex = 6;
         }
     }
 

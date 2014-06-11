@@ -56,7 +56,7 @@ public class UserAuthentication {
         if (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0) {
             fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
         }if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
-            fileName = "/User/user/NetBeansProjects/MTNLECPortal/PropertyFiles/afrinnovadatabase.properties";
+            fileName = "/Users/user/NetBeansProjects/MTNLECPortal/PropertyFiles/afrinnovadatabase.properties";
         }
         if (fileName.length() <= 0) {
             fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
