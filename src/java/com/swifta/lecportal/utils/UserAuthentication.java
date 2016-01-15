@@ -51,7 +51,7 @@ public class UserAuthentication {
             fileName = "C:\\PropertyFiles\\afrinnovadatabase.properties";
         }
         if (System.getProperty("os.name").toLowerCase().indexOf("sunos") >= 0) {
-            fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
+            fileName = "/opt/swifta/server/properties/testafrinnovadatabase.properties";
         }
         if (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0) {
             fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
