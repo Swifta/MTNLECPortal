@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 public class DBUtils {
 
     private Logger logger = Logger.getLogger(DBUtils.class);
-    public static PropertyFileReader fr = new PropertyFileReader("/opt/swifta/properties/schoolportal.properties");
+    public static PropertyFileReader fr = new PropertyFileReader("/opt/swifta/properties/testafrinnovadatabase.properties");
     public static Connection connection;
 
     static {
