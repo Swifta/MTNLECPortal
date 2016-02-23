@@ -70,6 +70,7 @@ public class MinimumRateDatabase {
             minimumRate.setAmount(String.valueOf(res.getDouble("amount")));
             minimumRate.setDatecreated(res.getString("datecreated"));
             minimumRate.setId(res.getInt("id"));
+            minimumRate.setCurrency(res.getString("currency"));
             logger.info("The minimum rate retrieved:::>>>>" + minimumRate.toString());
             minimumRates.add(minimumRate);
         }
@@ -91,13 +92,14 @@ public class MinimumRateDatabase {
     }
 
     public boolean createMinimumRate(MinimumRate minimumRate) throws SQLException, IOException, JSONException {
-        String sqlQuery = "insert into min_transaction (id,amount,datecreated) values (?,?,?)";
+        String sqlQuery = "insert into min_transaction (id,amount,currency, datecreated) values (?,?,?,?)";
         logger.info("Query : " + sqlQuery + ">>>>>>"+minimumRate.toString());
         JDCConnection connection = PortalDatabase.source.getConnection();
         PreparedStatement prepStmt = connection.prepareStatement(sqlQuery);
         prepStmt.setInt(1, (getLastID("min_transaction") + 1));
         prepStmt.setDouble(2, Double.valueOf(minimumRate.getAmount()));
-        prepStmt.setString(3, new Timestamp(new Date().getTime()).toString());
+        prepStmt.setString(3, minimumRate.getCurrency());
+        prepStmt.setString(4, new Timestamp(new Date().getTime()).toString());
         boolean ex = prepStmt.execute();
 
         //connection.close();

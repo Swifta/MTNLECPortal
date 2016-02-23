@@ -13,13 +13,14 @@
             </h:panelGrid>                    
         </h:form>
     </p:dialog>
+  
     <div style="text-align: right;padding: 5px;" class="elevens">
         <h:form>
             <p:commandButton value="Add Minimum Rate" styleClass="elevens bolds" onclick="minimumrate.show();" style="display:#{portalAdminBean.editable}"/>
             <p:spacer width="20"/>
         </h:form>
     </div>
-    <br />
+    <br/>
     <h:form>
         <h:panelGrid styleClass="elevens bolds" columns="7" style="width : 90%;margin: 0 auto">
             <h:outputLabel value=""/>
@@ -78,16 +79,22 @@
                     <p:dataExporter type="xml" target="schools" fileName="#{schoolBean.minimumRatesFileName}" pageOnly="true"/>  
                 </h:commandLink>  
             </p:panel>  
-        </h:panelGrid><p:dataTable paginator="true" rows="20"  
+        </h:panelGrid>
+        
+        <p:dataTable paginator="true" rows="20"  
                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                    rowsPerPageTemplate="5,10,15" styleClass="elevens datatables" value="#{schoolBean.allMinimumRates}" var="allMinimumRates" id="exchangetable">
             <f:facet name="header">List of Minimum Rates</f:facet>
-            <p:column headerText=" Minimum rate in LSD" sortBy="#{allMinimumRates.amount}">
+            <p:column style="width:15px" headerText=" Minimum rate" sortBy="#{allMinimumRates.amount}">
                 <h:outputLabel value="#{allMinimumRates.amount}"/>
-            </p:column><p:column headerText=" Date of Minimum Rate " sortBy="#{allMinimumRates.datecreated}">
+            </p:column>
+            <p:column style="width:15px" headerText="Currency" sortBy="#{allMinimumRates.currency}">
+                <h:outputLabel value="#{allMinimumRates.currency}"/>
+            </p:column>
+            <p:column style="width:15px" headerText=" Date of Minimum Rate " sortBy="#{allMinimumRates.datecreated}">
                 <h:outputLabel value="#{allMinimumRates.datecreated}"/>
             </p:column>
-            <p:column>  
+            <p:column style="width:15px">  
                 <p:commandLink action="#{schoolBean.retrieveSchool(schools.id)}" style="display:#{portalAdminBean.editable};">
                     <h:graphicImage  value="images/edit.png" /></p:commandLink>  
             </p:column>                   

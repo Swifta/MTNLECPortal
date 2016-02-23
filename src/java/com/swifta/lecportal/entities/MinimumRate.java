@@ -12,6 +12,7 @@ public class MinimumRate {
     private int id;
     private String amount;
     private String datecreated;
+    private String currency;
 
     public int getId() {
         return id;
@@ -36,7 +37,16 @@ public class MinimumRate {
     public void setDatecreated(String datecreated) {
         this.datecreated = datecreated;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+    
     public String toString(){
-        return this.id + ">>ID - "+this.amount+">>AMOUNT - "+this.datecreated+">> DATE";
+        return this.id + ">>ID - "+this.currency + ">>currency - "+this.amount+">>AMOUNT - "+this.datecreated+">> DATE";
     }
 }

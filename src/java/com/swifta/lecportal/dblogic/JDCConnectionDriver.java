@@ -4,7 +4,7 @@
  */
 package com.swifta.lecportal.dblogic;
 
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
 import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Logger;

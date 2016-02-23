@@ -46,21 +46,31 @@ public class UserAuthentication {
     
     public String getFilePath() {
         logger.info("Getting properties file path ... "+System.getProperty("os.name"));
+        logger.info("Getting properties file path2 ... "+System.getProperty("os.name").startsWith("mac"));
+        
+        
         String fileName = "";
-        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
-            fileName = "C:\\PropertyFiles\\afrinnovadatabase.properties";
-        }
-        if (System.getProperty("os.name").toLowerCase().indexOf("sunos") >= 0) {
-            fileName = "/opt/swifta/server/properties/testafrinnovadatabase.properties";
-        }
-        if (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0) {
-            fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
-        }if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
-            fileName = "/Users/user/NetBeansProjects/MTNLECPortal/PropertyFiles/afrinnovadatabase.properties";
-        }
-        if (fileName.length() <= 0) {
-            fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
-        }
+        if (System.getProperty("os.name").startsWith("Mac")) {
+            fileName = "/Users/modupealadeojebi/Desktop/database.properties";
+            }else{
+                fileName = "/opt/swifta/server/properties/database.properties";
+            }
+        
+        
+//        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+//            fileName = "C:\\PropertyFiles\\afrinnovadatabase.properties";
+//        }
+//        if (System.getProperty("os.name").toLowerCase().indexOf("sunos") >= 0) {
+//            fileName = "/opt/swifta/server/properties/testafrinnovadatabase.properties";
+//        }
+//        if (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0) {
+//            fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
+//        }if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+//            fileName = "/Users/user/NetBeansProjects/MTNLECPortal/PropertyFiles/afrinnovadatabase.properties";
+//        }
+//        if (fileName.length() <= 0) {
+//            fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
+//        }
         logger.info("Fetching properties file from : " + fileName);
         return fileName;
     }
