@@ -51,9 +51,9 @@ public class UserAuthentication {
         
         String fileName = "";
         if (System.getProperty("os.name").startsWith("Mac")) {
-            fileName = "/Users/modupealadeojebi/Desktop/database.properties";
+            fileName = "/Users/modupealadeojebi/Desktop/afrinnovadatabase.properties";
             }else{
-                fileName = "/opt/swifta/server/properties/database.properties";
+                fileName = "/opt/swifta/server/properties/afrinnovadatabase.properties";
             }
         
         

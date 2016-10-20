@@ -5,10 +5,16 @@
       ><p:dialog header="Add New Minimum Rate" widgetVar="minimumrate" styleClass="elevens bolds" width="450" resizable="false" modal="true">
         <h:form>
             <h:panelGrid styleClass="elevens" columns="2" style="width : 90%;margin: 0 auto">
-
+                <p:outputLabel for="console" value="Enter Amount:" />
                 <h:inputText value="#{schoolBean.minimumRate.amount}" styleClass="elevens padded" size="35" required="true" requiredMessage="Exchange rate required" validatorMessage="Validation Error: Ensure the exchange rate contains just valid numbers.">
                     LSD   <f:validateRegex pattern="^\d+(\.\d+)?$" />
                 </h:inputText>
+                <p:outputLabel for="console" value="Choose Currency:" />
+                <p:selectOneMenu id="console" value="#{schoolBean.minimumRate.currency}">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItem itemLabel="LRD" itemValue="LRD" />
+                    <f:selectItem itemLabel="USD" itemValue="USD" />
+                </p:selectOneMenu>
                 <h:commandButton   value="Create Minimum Rate" styleClass="buttons elevens whites bolds padded" style="color : #fff;" action="#{schoolBean.createMinimumRate()}"/> 
             </h:panelGrid>                    
         </h:form>
@@ -93,9 +99,5 @@
             </p:column>
             <p:column style="width:15px" headerText=" Date of Minimum Rate " sortBy="#{allMinimumRates.datecreated}">
                 <h:outputLabel value="#{allMinimumRates.datecreated}"/>
-            </p:column>
-            <p:column style="width:15px">  
-                <p:commandLink action="#{schoolBean.retrieveSchool(schools.id)}" style="display:#{portalAdminBean.editable};">
-                    <h:graphicImage  value="images/edit.png" /></p:commandLink>  
-            </p:column>                   
+            </p:column>               
         </p:dataTable></h:form></html>
